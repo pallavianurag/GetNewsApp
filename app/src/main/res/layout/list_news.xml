@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/screenshot_2022_08_11_at_2_12_04_am"
+         />
+
+    <TextView
+        android:id="@+id/myImageViewText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/myImageView"
+        android:layout_alignTop="@id/myImageView"
+        android:layout_alignRight="@id/myImageView"
+        android:layout_alignBottom="@id/myImageView"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="#f2f2f2"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-black"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <TextView
+        android:id="@+id/myImageViewText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/myImageView"
+        android:layout_alignTop="@id/myImageView"
+        android:layout_alignRight="@id/myImageView"
+        android:layout_alignBottom="@id/myImageView"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="#f2f2f2"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="373dp" />
+
+    <TextView
+        android:id="@+id/myImageViewText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/myImageView"
+        android:layout_alignTop="@id/myImageView"
+        android:layout_alignRight="@id/myImageView"
+        android:layout_alignBottom="@id/myImageView"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="#f2f2f2"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="373dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
