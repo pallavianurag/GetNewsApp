@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +16,7 @@ class ItemAdapter(private val listener: NewsItemClicked): RecyclerView.Adapter<N
     private val items: ArrayList<News> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_news, parent, false)
         val viewHolder = NewsViewHolder(view)
         view.setOnClickListener{
             listener.onItemClicked(items[viewHolder.adapterPosition])
@@ -44,7 +45,7 @@ class ItemAdapter(private val listener: NewsItemClicked): RecyclerView.Adapter<N
 
 class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val titleView: TextView = itemView.findViewById(R.id.title)
-    val image: ImageView = itemView.findViewById(R.id.image)
+    val image: ImageView = itemView.findViewById(R.id.myImageView)
     val author: TextView = itemView.findViewById(R.id.author)
 }
 

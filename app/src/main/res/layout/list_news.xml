@@ -14,7 +14,7 @@
          />
 
     <TextView
-        android:id="@+id/myImageViewText1"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/myImageView"
@@ -31,7 +31,7 @@
         tools:layout_editor_absoluteY="323dp" />
 
     <TextView
-        android:id="@+id/myImageViewText2"
+        android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/myImageView"
@@ -47,7 +47,7 @@
         tools:layout_editor_absoluteY="373dp" />
 
     <TextView
-        android:id="@+id/myImageViewText3"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/myImageView"
