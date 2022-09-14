@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.getnewsapp.MainActivity
 import com.example.getnewsapp.R
 import com.example.getnewsapp.model.News
 
@@ -47,6 +49,7 @@ class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val titleView: TextView = itemView.findViewById(R.id.title)
     val image: ImageView = itemView.findViewById(R.id.myImageView)
     val author: TextView = itemView.findViewById(R.id.author)
+    val cardView: CardView= itemView.findViewById(R.id.main_container)
 }
 
 interface NewsItemClicked {

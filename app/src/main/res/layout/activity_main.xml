@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity"
    >
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/news_recycler_view"
     android:layout_width="match_parent"
+    android:background="@color/grey"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
     app:layoutManager="LinearLayoutManager"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/my_nav" />
 
 
 </FrameLayout>

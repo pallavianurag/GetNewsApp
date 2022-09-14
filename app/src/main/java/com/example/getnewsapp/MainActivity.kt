@@ -1,21 +1,19 @@
 package com.example.getnewsapp
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.getnewsapp.adapter.ItemAdapter
-import com.example.getnewsapp.databinding.ActivityMainBinding
-import com.example.getnewsapp.databinding.ListNewsBinding
-import com.example.getnewsapp.data.DataSource
+import com.example.getnewsapp.adapter.NewsItemClicked
 import com.example.getnewsapp.model.News
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NewsItemClicked {
     //private lateinit var binding: ListNewsBinding
     private lateinit var mAdapter: ItemAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)*/
         val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
         fetchData()
-         mAdapter = ItemAdapter(this)
+        mAdapter = ItemAdapter(this)
         recyclerView.adapter = mAdapter
     }
     private fun fetchData() {
-        val url = "https://newsapi.org/v2/top-headlines?country=in&category=science&piKey=1f4a12d2698e432ea9cf18126dcc7acd"
+        val url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=7ec05041864f4b64bd5d2ffb92afa9ac"
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
             url,
@@ -49,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                         newsJsonObject.getString("url"),
                         newsJsonObject.getString("urlToImage")
                     )
+                    println(news);
                     newsArray.add(news)
                 }
                 mAdapter.updateNews(newsArray)
@@ -61,9 +60,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onItemClicked(item: News) {
-        val builder =  CustomTabsIntent.Builder()
-        val customTabsIntent = builder.build()
-        customTabsIntent.launchUrl(this, Uri.parse(item.url))
+        val myIntent:Intent = Intent(this,NewsActivity::class.java)
+        startActivity(myIntent)
     }
 }
 
