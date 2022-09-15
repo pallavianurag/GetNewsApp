@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.getnewsapp.adapter.ItemAdapter
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
         mAdapter = ItemAdapter(this)
         recyclerView.adapter = mAdapter
     }
-    private fun fetchData() {
+   /* private fun fetchData() {
         val url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=7ec05041864f4b64bd5d2ffb92afa9ac"
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -57,10 +58,50 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
             }
         )
         Single.getInstance(this).addToRequestQueue(jsonObjectRequest)
-    }
+    }*/
+   private fun fetchData() {
+       val url =
+           "https://newsapi.org/v2/top-headlines?country=in&apiKey=7ec05041864f4b64bd5d2ffb92afa9ac"
+       val jsonObjectRequest = object : JsonObjectRequest(
+           Request.Method.GET,
+           url,
+           null,
+           {
+               val newsJsonArray = it.getJSONArray("articles")
+               val newsArray = ArrayList<News>()
+               for (i in 0 until newsJsonArray.length()) {
+                   val newsJsonObject = newsJsonArray.getJSONObject(i)
+                   val news = News(
+                       newsJsonObject.getString("urlToImage"),
+                       newsJsonObject.getString("title"),
+                       newsJsonObject.getString("author"),
+                       newsJsonObject.getString("url")
+
+                   )
+                   println(news);
+                   newsArray.add(news)
+               }
+               mAdapter.updateNews(newsArray)
+           },
+           {
+
+           }
+       ) {
+           @Throws(AuthFailureError::class)
+           override fun getHeaders(): Map<String, String> {
+               val params: MutableMap<String, String> = HashMap()
+               params["User-Agent"] = "Mozilla/5.0"
+               return params
+           }
+       }
+       Single.getInstance(this).addToRequestQueue(jsonObjectRequest)
+   }
+
 
     override fun onItemClicked(item: News) {
+
         val myIntent:Intent = Intent(this,NewsActivity::class.java)
+        myIntent.putExtra("data",item)
         startActivity(myIntent)
     }
 }
