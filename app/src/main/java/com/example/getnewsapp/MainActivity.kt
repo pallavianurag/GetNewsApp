@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
                        newsJsonObject.getString("urlToImage"),
                        newsJsonObject.getString("title"),
                        newsJsonObject.getString("author"),
-                       newsJsonObject.getString("url")
+                       newsJsonObject.getString("publishedAt"),
+                       newsJsonObject.getString("description")
 
                    )
                    println(news);

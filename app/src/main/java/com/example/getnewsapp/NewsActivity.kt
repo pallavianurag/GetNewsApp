@@ -19,53 +19,52 @@ class NewsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_news)
          item= intent.getSerializableExtra("data") as News
 
-        val image: ImageView = findViewById(R.id.myImageView)
-        val titleView: TextView = findViewById(R.id.title)
+        val image: ImageView = findViewById(R.id.detail_img)
+        val titleView: TextView = findViewById(R.id.detail_title)
 
         val author: TextView = findViewById(R.id.author)
         val date: TextView=findViewById(R.id.date)
         fetchData()
-        image.setImageResource()
+        //image.setImageResource()
         titleView.text="x"
             //val cardView: CardView= itemView.findViewById(R.id.main_container)
         }
-    }
-private fun fetchData() {
-    val url =
-        "https://newsapi.org/v2/top-headlines?country=in&apiKey=7ec05041864f4b64bd5d2ffb92afa9ac"
-    val jsonObjectRequest = object : JsonObjectRequest(
-        Request.Method.GET,
-        url,
-        null,
-        {
-            val newsJsonArray = it.getJSONArray("articles")
-            val newsArray = ArrayList<News>()
-            for (i in 0 until newsJsonArray.length()) {
-                val newsJsonObject = newsJsonArray.getJSONObject(i)
-                val news = News(
-                    newsJsonObject.getString("urlToImage"),
-                    newsJsonObject.getString("title"),
-                    newsJsonObject.getString("author"),
-                    newsJsonObject.getString("url")
+    private fun fetchData() {
+        val url =
+            "https://newsapi.org/v2/top-headlines?country=in&apiKey=7ec05041864f4b64bd5d2ffb92afa9ac"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Request.Method.GET,
+            url,
+            null,
+            {
+                val newsJsonArray = it.getJSONArray("articles")
+                val newsArray = ArrayList<News>()
+                for (i in 0 until newsJsonArray.length()) {
+                    val newsJsonObject = newsJsonArray.getJSONObject(i)
+                    val news = News(
+                        newsJsonObject.getString("urlToImage"),
+                        newsJsonObject.getString("title"),
+                        newsJsonObject.getString("author"),
+                        newsJsonObject.getString("publishedAt"),
+                        newsJsonObject.getString("description")
+                    )
+                    println(news);
+                    newsArray.add(news)
+                }
 
-                )
-                println(news);
-                newsArray.add(news)
+            },
+            {
+
             }
-
-        },
-        {
-
+        ) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["User-Agent"] = "Mozilla/5.0"
+                return params
+            }
         }
-    ) {
-        @Throws(AuthFailureError::class)
-        override fun getHeaders(): Map<String, String> {
-            val params: MutableMap<String, String> = HashMap()
-            params["User-Agent"] = "Mozilla/5.0"
-            return params
-        }
+        Single.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
-    Single.getInstance(this).addToRequestQueue(jsonObjectRequest)
-}
 
 }

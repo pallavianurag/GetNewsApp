@@ -1,10 +1,18 @@
 package com.example.getnewsapp.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
- class News  (
+import java.io.Serializable
+@Parcelize
+@Entity
+ data class News  (
+                @PrimaryKey
                 val title: String,
                  val author: String,
                  val date: String,
                  val imageUrl: String,
-) : Serializable
+                val description:String
+): Parcelable
